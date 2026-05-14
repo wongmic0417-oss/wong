@@ -1,0 +1,280 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.wrap { padding: 24px 0; font-family: var(--font-sans); }
+
+.track-label {
+  font-size: 11px; font-weight: 500; letter-spacing: .06em;
+  color: var(--color-text-tertiary); margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.track {
+  display: flex; align-items: center; gap: 0;
+  margin-bottom: 8px; flex-wrap: nowrap;
+}
+
+.node {
+  display: flex; flex-direction: column; align-items: center;
+  min-width: 80px; flex-shrink: 0;
+}
+
+.node-box {
+  padding: 7px 12px; border-radius: var(--border-radius-md);
+  font-size: 12px; font-weight: 500; text-align: center;
+  border: 0.5px solid var(--color-border-secondary);
+  background: var(--color-background-primary);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.node-box.highlight-purple {
+  background: #EEEDFE; border-color: #AFA9EC; color: #3C3489;
+}
+.node-box.highlight-teal {
+  background: #E1F5EE; border-color: #5DCAA5; color: #085041;
+}
+.node-box.highlight-amber {
+  background: #FAEEDA; border-color: #EF9F27; color: #633806;
+}
+.node-box.highlight-coral {
+  background: #FAECE7; border-color: #F0997B; color: #712B13;
+}
+.node-box.highlight-pink {
+  background: #FBEAF0; border-color: #ED93B1; color: #72243E;
+}
+
+.aha-tag {
+  margin-top: 5px; font-size: 10px; font-weight: 500;
+  padding: 2px 8px; border-radius: 10px; white-space: nowrap;
+}
+.aha-tag.purple { background: #EEEDFE; color: #534AB7; }
+.aha-tag.teal   { background: #E1F5EE; color: #0F6E56; }
+.aha-tag.amber  { background: #FAEEDA; color: #854F0B; }
+.aha-tag.coral  { background: #FAECE7; color: #993C1D; }
+.aha-tag.pink   { background: #FBEAF0; color: #993556; }
+
+.arrow {
+  font-size: 14px; color: var(--color-text-tertiary);
+  padding: 0 4px; flex-shrink: 0; align-self: center;
+  margin-bottom: 22px;
+}
+
+.brace-label {
+  font-size: 11px; color: var(--color-text-secondary);
+  text-align: center; margin-top: 4px; min-width: 80px;
+}
+
+.divider {
+  border: none; border-top: 0.5px solid var(--color-border-tertiary);
+  margin: 20px 0;
+}
+
+.aha-cards {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
+  margin-top: 20px;
+}
+
+.aha-card {
+  border-radius: var(--border-radius-lg);
+  border: 0.5px solid var(--color-border-tertiary);
+  padding: 12px; cursor: pointer; transition: border-color .15s;
+  background: var(--color-background-primary);
+}
+.aha-card:hover { border-color: var(--color-border-secondary); }
+.aha-card.active { border-width: 1px; }
+.aha-card.active.c-purple { border-color: #7F77DD; }
+.aha-card.active.c-teal   { border-color: #1D9E75; }
+.aha-card.active.c-amber  { border-color: #EF9F27; }
+.aha-card.active.c-coral  { border-color: #D85A30; }
+.aha-card.active.c-pink   { border-color: #D4537E; }
+
+.aha-card-num {
+  font-size: 10px; font-weight: 500; margin-bottom: 4px;
+}
+.c-purple .aha-card-num { color: #534AB7; }
+.c-teal   .aha-card-num { color: #0F6E56; }
+.c-amber  .aha-card-num { color: #854F0B; }
+.c-coral  .aha-card-num { color: #993C1D; }
+.c-pink   .aha-card-num { color: #993556; }
+
+.aha-card-title {
+  font-size: 12px; font-weight: 500;
+  color: var(--color-text-primary); line-height: 1.4;
+  margin-bottom: 4px;
+}
+.aha-card-sub {
+  font-size: 11px; color: var(--color-text-secondary); line-height: 1.5;
+}
+
+.detail-box {
+  border-radius: var(--border-radius-lg);
+  padding: 16px 18px; margin-top: 12px;
+  border: 0.5px solid var(--color-border-tertiary);
+  background: var(--color-background-primary);
+}
+.detail-box .moment {
+  font-size: 13px; font-style: italic; line-height: 1.7;
+  margin-bottom: 10px;
+}
+.detail-box.c-purple .moment { color: #534AB7; }
+.detail-box.c-teal   .moment { color: #0F6E56; }
+.detail-box.c-amber  .moment { color: #854F0B; }
+.detail-box.c-coral  .moment { color: #993C1D; }
+.detail-box.c-pink   .moment { color: #993556; }
+
+.detail-box .design-note {
+  font-size: 12px; color: var(--color-text-secondary); line-height: 1.7;
+  border-top: 0.5px solid var(--color-border-tertiary);
+  padding-top: 10px; margin-top: 4px;
+}
+
+.track-note {
+  font-size: 11px; color: var(--color-text-tertiary);
+  font-style: italic; margin-top: 6px; margin-bottom: 4px;
+  padding-left: 2px;
+}
+</style>
+
+<div class="wrap">
+  <h2 class="sr-only">知星兽 5 个 Aha Moment 与用户旅程</h2>
+
+  <div class="track-label">新用户链路</div>
+  <div class="track">
+    <div class="node">
+      <div class="node-box">感受</div>
+      <div class="brace-label"></div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node">
+      <div class="node-box highlight-purple">召唤/链接</div>
+      <div class="aha-tag purple">Aha①</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node">
+      <div class="node-box">主页</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node">
+      <div class="node-box">冷启动聊天</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node">
+      <div class="node-box highlight-teal">初次深挖</div>
+      <div class="aha-tag teal">Aha②</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node">
+      <div class="node-box highlight-teal">第一次记录</div>
+      <div class="aha-tag teal">Aha②</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node">
+      <div class="node-box highlight-amber">第一次感受自己</div>
+      <div class="aha-tag amber">Aha③</div>
+    </div>
+  </div>
+  <div class="track-note">新用户未必需要首次就成长，但需要感受到「能」</div>
+
+  <hr class="divider">
+
+  <div class="track-label">回访用户链路</div>
+  <div class="track">
+    <div class="node">
+      <div class="node-box">主页</div>
+      <div class="brace-label" style="font-size:10px;color:var(--color-text-tertiary);">根据情绪初判定势</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node">
+      <div class="node-box highlight-coral">召唤</div>
+      <div class="aha-tag coral">Aha④</div>
+      <div class="brace-label" style="font-size:10px;color:var(--color-text-tertiary);">摇/拍/吹/打…</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node">
+      <div class="node-box">聊天</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node">
+      <div class="node-box">日常</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node">
+      <div class="node-box highlight-pink">成长</div>
+      <div class="aha-tag pink">Aha⑤</div>
+    </div>
+  </div>
+
+  <div class="aha-cards" id="aha-cards"></div>
+  <div id="aha-detail"></div>
+
+</div>
+
+<script>
+const ahas = [
+  {
+    num: "Aha①",
+    title: "原来它可以被我叫到",
+    sub: "新用户 · 初次召唤",
+    color: "c-purple",
+    moment: "「这不是普通的 AI 对话——它是可以被我叫到的存在。」",
+    design: "召唤动作高度模拟现实叫朋友的方式（摇/拍/吹/打），动作本身就建立关系感。成立条件是双向的：用户的动作 + 知星兽被叫醒后的回应质感，两者合在一起才是完整的「叫朋友」体验。"
+  },
+  {
+    num: "Aha②",
+    title: "它懂我，还记住了我",
+    sub: "新用户 · 冷启动→第一次记录",
+    color: "c-teal",
+    moment: "「它说的就是我。而且它把这件事记下来了。」",
+    design: "冷启动到第一次记录是一个完整的 Aha，不可拆分。知星兽扮演「翻译者」而非提问者——帮用户把说不出来的感受翻译成语言，用户只需要找到「对，就是这个」的那一刻。记录是这段体验的落点，让「懂我」变得可见。"
+  },
+  {
+    num: "Aha③",
+    title: "这里能让我成长",
+    sub: "新用户 · 第一次感受自己",
+    color: "c-amber",
+    moment: "「我感受到了——这个地方真的能帮我变成更好的自己。」",
+    design: "新用户不需要第一次就真的成长，但必须在第一次就感受到「能」。这是留存的心理根基，跟功能完成度无关，跟情感感知有关。这个 Aha 是「我想回来」的理由。"
+  },
+  {
+    num: "Aha④",
+    title: "它就是我现实生活里的朋友",
+    sub: "回访用户 · 老用户召唤",
+    color: "c-coral",
+    moment: "「不需要重新介绍自己，不需要解释上下文——它直接就接上了。」",
+    design: "老用户的召唤动作和新用户相同，但心理体验完全不同：新用户是「建立关系」，老用户是「回到关系」。回应里要有记忆、有温度、有「我们之间的那些事」，让用户感知到的是朋友之间自然的熟悉感，而不是功能触发。"
+  },
+  {
+    num: "Aha⑤",
+    title: "我真的在变",
+    sub: "回访用户 · 日常→成长",
+    color: "c-pink",
+    moment: "「我回头看，发现我和三个月前说话的方式不一样了。」",
+    design: "不是单次体验的惊喜，而是时间维度上的感知积累。五维人格星座的形态变化、成长故事记录、知星兽的见证语——这些加在一起让用户感知到「我在被看见地成长」，而不是自己孤独地努力。"
+  }
+];
+
+let current = 0;
+
+function render() {
+  document.getElementById('aha-cards').innerHTML = ahas.map((a, i) => `
+    <div class="aha-card ${a.color} ${i === current ? 'active' : ''}" onclick="select(${i})">
+      <div class="aha-card-num">${a.num}</div>
+      <div class="aha-card-title">${a.title}</div>
+      <div class="aha-card-sub">${a.sub}</div>
+    </div>
+  `).join('');
+
+  const a = ahas[current];
+  document.getElementById('aha-detail').innerHTML = `
+    <div class="detail-box ${a.color}">
+      <div class="moment">「${a.moment.replace(/「|」/g, '')}」</div>
+      <div class="design-note">${a.design}</div>
+    </div>
+  `;
+}
+
+function select(i) { current = i; render(); }
+render();
+</script>
